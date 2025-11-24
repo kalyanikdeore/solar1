@@ -1,4 +1,3 @@
-// src/components/WhyChooseUs.jsx
 import React from "react";
 import { motion } from "framer-motion";
 import {
@@ -9,7 +8,11 @@ import {
   Monitor,
   Zap,
   Phone,
-  Eye,
+  Leaf,
+  Award,
+  Sun,
+  Battery,
+  Clock,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -18,41 +21,68 @@ const WhyChooseUs = () => {
 
   const features = [
     {
-      icon: <Users className="h-8 w-8" />,
+      icon: Users,
       title: "Expert Team",
-      description:
-        "Experienced solar professionals dedicated to delivering efficient and trusted renewable solutions.",
+      description: "Certified solar professionals dedicated to delivering efficient and trusted renewable energy solutions.",
+      color: "#4DB6E2",
+      gradient: "from-[#4DB6E2] to-[#2E7D32]"
     },
     {
-      icon: <DraftingCompass className="h-8 w-8" />,
+      icon: DraftingCompass,
       title: "Precision Design",
-      description:
-        "Advanced 2D and 3D system designs for maximum solar efficiency and performance.",
+      description: "Advanced 2D and 3D system designs optimized for maximum solar efficiency and energy production.",
+      color: "#F4C430",
+      gradient: "from-[#F4C430] to-[#F28B30]"
     },
     {
-      icon: <Shield className="h-8 w-8" />,
+      icon: Shield,
       title: "Quality Materials",
-      description:
-        "We use top-tier components ensuring durability, safety, and long-term savings.",
+      description: "Premium components ensuring durability, safety, and long-term performance with industry-leading warranties.",
+      color: "#2E7D32",
+      gradient: "from-[#2E7D32] to-[#4DB6E2]"
     },
     {
-      icon: <Factory className="h-8 w-8" />,
+      icon: Factory,
       title: "In-house Manufacturing",
-      description:
-        "Custom GI mounting structures – 30% stronger, lighter, and built to last.",
+      description: "Custom GI mounting structures – 30% stronger, lighter weight, and engineered for longevity.",
+      color: "#F28B30",
+      gradient: "from-[#F28B30] to-[#5D4633]"
     },
     {
-      icon: <Monitor className="h-8 w-8" />,
-      title: "Online Monitoring",
-      description:
-        "Track system performance in real-time with smart IoT dashboards.",
+      icon: Monitor,
+      title: "Smart Monitoring",
+      description: "Real-time performance tracking with advanced IoT dashboards and predictive maintenance alerts.",
+      color: "#4DB6E2",
+      gradient: "from-[#4DB6E2] to-[#2E7D32]"
     },
     {
-      icon: <Zap className="h-8 w-8" />,
+      icon: Zap,
       title: "Proven Technologies",
-      description:
-        "From Mono PERC to Bifacial panels — our technology powers your sustainability goals.",
+      description: "From Mono PERC to Bifacial panels — cutting-edge technology powering your sustainability goals.",
+      color: "#F4C430",
+      gradient: "from-[#F4C430] to-[#F28B30]"
     },
+    {
+      icon: Battery,
+      title: "Energy Storage",
+      description: "Integrated battery solutions for uninterrupted power supply and maximum energy independence.",
+      color: "#2E7D32",
+      gradient: "from-[#2E7D32] to-[#4DB6E2]"
+    },
+    {
+      icon: Clock,
+      title: "Rapid Deployment",
+      description: "Efficient project execution with minimal disruption and faster return on investment.",
+      color: "#F28B30",
+      gradient: "from-[#F28B30] to-[#5D4633]"
+    },
+  ];
+
+  const stats = [
+    { number: "50+", label: "Projects Completed", color: "#F4C430" },
+    { number: "2MW+", label: "Solar Capacity", color: "#4DB6E2" },
+    { number: "100%", label: "Client Satisfaction", color: "#2E7D32" },
+    { number: "5+", label: "Years Experience", color: "#F28B30" },
   ];
 
   const cardVariants = {
@@ -60,58 +90,73 @@ const WhyChooseUs = () => {
     visible: (i) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: i * 0.15, duration: 0.7, ease: "easeOut" },
+      transition: { delay: i * 0.1, duration: 0.7, ease: "easeOut" },
     }),
   };
 
   return (
-    <section className="relative overflow-hidden py-24 bg-gradient-to-br from-[#e8f9f8] via-white to-[#c9f4f3]">
-      {/* Background wave effect */}
+    <section className="relative overflow-hidden py-24 bg-gradient-to-br from-[#F6F7F4] to-white">
+      {/* Background Elements */}
       <div className="absolute inset-0">
-        <svg
-          className="absolute top-0 left-0 w-full opacity-30"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1440 320"
-        >
-          <path
-            fill="#10a19d"
-            fillOpacity="0.1"
-            d="M0,96L48,122.7C96,149,192,203,288,218.7C384,235,480,213,576,208C672,203,768,213,864,197.3C960,181,1056,139,1152,133.3C1248,128,1344,160,1392,176L1440,192L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
-          ></path>
-        </svg>
+        <div className="absolute top-0 left-0 w-96 h-96 bg-[#F4C430]/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#2E7D32]/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#4DB6E2]/5 rounded-full blur-3xl" />
+        
+        {/* Grid Pattern */}
+        <div 
+          className="absolute inset-0 opacity-5"
+          style={{
+            backgroundImage: `linear-gradient(#2E7D32 1px, transparent 1px),
+                             linear-gradient(90deg, #2E7D32 1px, transparent 1px)`,
+            backgroundSize: '50px 50px'
+          }}
+        />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Title Section */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-20"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-4xl font-bold text-gray-900 mb-4">
-            Why Choose{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#10a19d] to-[#0d817d]">
-              Navitas Efficens
-            </span>
-            ?
-          </h2>
           <motion.div
-            className="h-1 w-19 bg-[#10a19d] mx-auto mb-5"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2E7D32]/10 border border-[#2E7D32]/20 mb-6"
+          >
+            <Award className="h-4 w-4 text-[#2E7D32]" />
+            <span className="text-sm font-semibold text-[#2E7D32] tracking-wide">
+              WHY CHOOSE US
+            </span>
+          </motion.div>
+
+          <h2 className="text-4xl md:text-5xl font-bold text-[#1E1E1E] mb-6">
+            Solar Excellence{" "}
+            <span className="bg-gradient-to-r from-[#F4C430] to-[#F28B30] bg-clip-text text-transparent">
+              Defined
+            </span>
+          </h2>
+          
+          <motion.div
+            className="h-1 w-20 bg-gradient-to-r from-[#F4C430] to-[#F28B30] mx-auto mb-6"
             initial={{ width: 0 }}
-            whileInView={{ width: "4.9rem" }}
+            whileInView={{ width: "5rem" }}
             transition={{ delay: 0.3, duration: 0.5 }}
             viewport={{ once: true }}
           />
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Where innovation meets sustainability — delivering smart, clean, and
-            reliable solar energy.
+          
+          <p className="text-xl text-[#4A4A4A] max-w-3xl mx-auto leading-relaxed">
+            Where solar innovation meets sustainable engineering — delivering smart, reliable, 
+            and efficient renewable energy solutions for a brighter future.
           </p>
         </motion.div>
 
         {/* Feature Cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {features.map((feature, index) => (
             <motion.div
               key={index}
@@ -122,58 +167,85 @@ const WhyChooseUs = () => {
               viewport={{ once: true }}
               whileHover={{
                 scale: 1.05,
-                rotate: 1,
-                boxShadow: "0 12px 25px rgba(16,161,157,0.2)",
+                y: -8,
+                boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
               }}
-              className="relative bg-white rounded-3xl p-8 shadow-sm transition-all duration-500"
+              className="relative bg-white rounded-2xl p-6 shadow-lg border border-[#D9DDDC] hover:shadow-xl transition-all duration-500 group"
             >
-              <div className="absolute -top-6 left-6 w-10 h-10 bg-gradient-to-tr from-[#10a19d] to-[#0d817d] rounded-2xl flex items-center justify-center shadow-md text-white">
-                {feature.icon}
+              {/* Icon Container */}
+              <div 
+                className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300"
+                style={{ 
+                  background: `linear-gradient(135deg, ${feature.color}15, ${feature.color}30)`,
+                  border: `2px solid ${feature.color}20`
+                }}
+              >
+                <feature.icon className="h-6 w-6" style={{ color: feature.color }} />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mt-8 mb-3">
+
+              {/* Content */}
+              <h3 className="text-lg font-bold text-[#1E1E1E] mb-3 group-hover:text-[#2E7D32] transition-colors">
                 {feature.title}
               </h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <p className="text-[#4A4A4A] text-sm leading-relaxed">
                 {feature.description}
               </p>
+
+              {/* Hover Gradient Border */}
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                <div className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${feature.gradient} opacity-20`} />
+              </div>
             </motion.div>
           ))}
         </div>
 
-        {/* CTA Section  */}
+        {/* CTA Section */}
         <motion.div
-          className="text-center mt-12"
+          className="text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <div className="bg-gradient-to-r from-[#10a19d] to-[#0d817d] rounded-2xl p-8 text-white">
-            <h3 className="text-2xl font-bold mb-4">
-              Ready to Start Your Solar Journey?
-            </h3>
-            <p className="text-white/90 mb-6 max-w-2xl mx-auto">
-              Join hundreds of satisfied customers who have transformed their
-              energy infrastructure with our reliable solar solutions.
+          <div className="bg-gradient-to-r from-[#2E7D32] to-[#4DB6E2] rounded-2xl p-10 text-white shadow-2xl">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Sun className="h-8 w-8 text-[#F4C430]" />
+              <h3 className="text-2xl md:text-3xl font-bold">
+                Ready to Start Your Solar Journey?
+              </h3>
+            </div>
+            
+            <p className="text-white/90 mb-8 max-w-2xl mx-auto text-lg leading-relaxed">
+              Join hundreds of satisfied customers who have transformed their energy 
+              infrastructure with our reliable, efficient solar solutions and achieved 
+              significant cost savings.
             </p>
+            
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <motion.button
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ 
+                  scale: 1.05,
+                  boxShadow: "0 10px 30px rgba(244, 196, 48, 0.4)"
+                }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => navigate("/contact")}
-                className="bg-white text-[#10a19d] px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl flex items-center gap-2"
+                className="bg-gradient-to-r from-[#F28B30] to-[#F4C430] text-white px-8 py-4 rounded-xl font-bold hover:shadow-xl transition-all shadow-lg flex items-center gap-3"
               >
-                <Phone className="h-4 w-4" />
+                <Phone className="h-5 w-5" />
                 Get Free Consultation
               </motion.button>
+              
               {/* <motion.button
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ 
+                  scale: 1.05,
+                  backgroundColor: "rgba(255,255,255,0.1)"
+                }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => navigate("/products")}
-                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-[#10a19d] transition-colors flex items-center gap-2"
+                onClick={() => navigate("/projects")}
+                className="border-2 border-white/30 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/10 transition-all flex items-center gap-3 backdrop-blur-sm"
               >
-                <Eye className="h-4 w-4" />
-                View Our Products
+                <Leaf className="h-5 w-5" />
+                View Projects
               </motion.button> */}
             </div>
           </div>

@@ -1,4 +1,3 @@
-// src/components/Services.jsx
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
@@ -15,117 +14,124 @@ import {
   Sparkles,
   Phone,
   Eye,
+  SolarPanel,
+  Zap,
+  Leaf,
+  Users,
 } from "lucide-react";
 
 const Services = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, threshold: 0.1 });
-  const navigate = useNavigate(); // ✅ React Router navigation hook
+  const navigate = useNavigate();
 
   const services = [
     {
-      icon: Wrench,
+      icon: SolarPanel,
       title: "Solar EPC Services",
-      description:
-        "Solar EPC services encompass the complete process of designing, sourcing materials and installing solar energy systems. These services include.",
+      description: "End-to-end Engineering, Procurement, and Construction services for solar projects with quality assurance and innovative design solutions.",
       points: [
         "Custom Design & Planning",
         "Quality Material Procurement",
         "Professional Installation",
         "Commissioning & Handover",
       ],
-      gradient: "from-orange-500 to-amber-600",
-      link: "/services", // ✅ redirect link
+      color: "#F4C430",
+      gradient: "from-[#F4C430] to-[#F28B30]",
+      link: "/services",
     },
     {
       icon: Cpu,
       title: "Solar BOS Components",
-      description:
-        "Navitas Efficens supplies quality Solar BOS Balance of System components which includes mounting structures, cabling, earthing material, safety and monitoring equipment etc.",
+      description: "High-quality Balance of System components including mounting structures, inverters, monitoring systems and safety equipment for optimal performance.",
       points: [
         "Mounting Structures",
         "Inverters & Switchgear",
         "Monitoring Systems",
         "Safety Equipment",
       ],
-      gradient: "from-blue-500 to-cyan-600",
+      color: "#4DB6E2",
+      gradient: "from-[#4DB6E2] to-[#2E7D32]",
       link: "/services",
     },
     {
       icon: Building,
       title: "Pre-engineered Structures",
-      description:
-        "Navitas Efficens designs and manufactures pre-engineered structures (PES),re pre-fabricated and  typically using steel other durable materials.",
+      description: "Custom-designed pre-engineered structures using durable materials for fast, cost-effective, and reliable solar installations.",
       points: [
         "Fast Construction",
         "Durable Materials",
         "Cost Effective",
         "Custom Designs",
       ],
-      gradient: "from-emerald-500 to-green-600",
+      color: "#2E7D32",
+      gradient: "from-[#2E7D32] to-[#4DB6E2]",
       link: "/services",
     },
     {
       icon: GraduationCap,
       title: "Skill Development Training",
-      description:
-        "Navitas Efficens offering solar skill development training is an excellent initiative  with the necessary knowledge and hands-on experience to work in the growing solar energy industry.",
+      description: "Comprehensive solar training programs with hands-on experience, industry experts, and certification for career growth in renewable energy.",
       points: [
         "Hands-on Training",
         "Industry Experts",
         "Certification Programs",
         "Career Placement",
       ],
-      gradient: "from-purple-500 to-pink-600",
+      color: "#F28B30",
+      gradient: "from-[#F28B30] to-[#5D4633]",
       link: "/services",
     },
     {
       icon: Lightbulb,
       title: "Consultancy Services",
-      description:
-        "Solar Consultancy Services provide expert advice and support throughout the planning, design, and implementation of solar energy systems.These services include feasibility study.",
+      description: "Expert solar consultancy from feasibility studies to performance monitoring, ensuring optimal system design and project success.",
       points: [
         "Feasibility Study",
         "System Design",
         "Project Management",
         "Performance Monitoring",
       ],
-      gradient: "from-yellow-500 to-amber-600",
+      color: "#F4C430",
+      gradient: "from-[#F4C430] to-[#F28B30]",
       link: "/services",
     },
     {
       icon: Shield,
       title: "Maintenance & Support",
-      description:
-        "Comprehensive maintenance packages and after-sales support with online monitoring capabilities. Reliable maintenance, seamless support — powered for your peace of mind.",
+      description: "Comprehensive maintenance packages with online monitoring, regular upkeep, and 24/7 support for maximum system efficiency and longevity.",
       points: [
         "Online Monitoring",
         "Regular Maintenance",
         "24/7 Support",
         "Performance Optimization",
       ],
-      gradient: "from-indigo-500 to-blue-600",
+      color: "#4DB6E2",
+      gradient: "from-[#4DB6E2] to-[#2E7D32]",
       link: "/services",
     },
   ];
 
   return (
-    <section className="py-24 bg-gradient-to-br from-white via-blue-50 to-blue-100 relative overflow-hidden">
-      {/* Animated Gradient Circles */}
-      <motion.div
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 2 }}
-        className="absolute top-10 left-10 w-64 h-64 bg-gradient-to-br from-blue-300 to-cyan-200 rounded-full blur-3xl opacity-40"
-      ></motion.div>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.3 }}
-        transition={{ duration: 2 }}
-        className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tr from-emerald-300 to-green-200 rounded-full blur-3xl"
-      ></motion.div>
+    <section className="py-24 bg-linear-to-br from-[#F6F7F4] to-white relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0">
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 2 }}
+          className="absolute top-10 left-10 w-64 h-64 bg-[#F4C430]/10 rounded-full blur-3xl"
+        />
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.4 }}
+          transition={{ duration: 2 }}
+          className="absolute bottom-0 right-0 w-96 h-96 bg-[#2E7D32]/10 rounded-full blur-3xl"
+        />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-[#4DB6E2]/5 rounded-full blur-3xl" />
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}
         <motion.div
           ref={ref}
@@ -137,86 +143,89 @@ const Services = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-full px-5 py-2 mb-6 shadow-sm"
+            className="inline-flex items-center gap-2 bg-[#2E7D32]/10 rounded-full px-5 py-2 mb-6 border border-[#2E7D32]/20"
           >
-            <Sparkles className="h-5 w-5 text-[#10a19d] animate-pulse" />
-            <span className="text-sm font-medium text-[#10a19d] tracking-wide">
-              Our Expertise
+            <Sparkles className="h-5 w-5 text-[#2E7D32] animate-pulse" />
+            <span className="text-sm font-semibold text-[#2E7D32] tracking-wide">
+              OUR EXPERTISE
             </span>
           </motion.div>
 
-          <h2 className="text-4xl md:text-4xl font-extrabold text-gray-900 mb-4">
-            What We{" "}
-            <span className="text-transparent bg-clip-text bg-[#10a19d]">
-              Offer
+          <h2 className="text-4xl md:text-5xl font-bold text-[#1E1E1E] mb-4">
+            Solar Energy{" "}
+            <span className="bg-linear-to-r from-[#F4C430] to-[#F28B30] bg-clip-text text-transparent">
+              Solutions
             </span>
           </h2>
           <motion.div
-            className="h-1 w-19 bg-[#10a19d] mx-auto mb-5"
+            className="h-1 w-20 bg-linear-to-r from-[#F4C430] to-[#F28B30] mx-auto mb-6"
             initial={{ width: 0 }}
-            whileInView={{ width: "3.7rem" }}
+            whileInView={{ width: "5rem" }}
             transition={{ delay: 0.3, duration: 0.5 }}
             viewport={{ once: true }}
           />
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Empowering sustainability with innovative solar engineering
-            solutions
+          <p className="text-xl text-[#4A4A4A] max-w-2xl mx-auto leading-relaxed">
+            Empowering sustainable futures with innovative solar engineering and cutting-edge renewable energy solutions
           </p>
         </motion.div>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.15 }}
-              whileHover={{ y: -6, scale: 1.03 }}
+              whileHover={{ y: -8, scale: 1.02 }}
               className="group relative"
             >
               {/* Glow effect */}
               <div
-                className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-20 blur-2xl transition-all duration-500 rounded-2xl`}
-              ></div>
+                className={`absolute inset-0 bg-linear-to-br ${service.gradient} opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500 rounded-2xl`}
+              />
 
-              <div className="bg-white/80 backdrop-blur-md rounded-2xl p-8 shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-100 h-full flex flex-col justify-between relative z-10">
+              <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-[#D9DDDC] h-full flex flex-col justify-between relative z-10">
                 {/* Icon */}
                 <div
-                  className={`w-12 h-12 bg-gradient-to-br ${service.gradient} rounded-2xl flex items-center justify-center mb-6 shadow-md group-hover:scale-110 transition-transform duration-300`}
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300"
+                  style={{ 
+                    background: `linear-gradient(135deg, ${service.color}15, ${service.color}30)`,
+                    border: `2px solid ${service.color}20`
+                  }}
                 >
-                  <service.icon className="h-8 w-8 text-white" />
+                  <service.icon className="h-7 w-7" style={{ color: service.color }} />
                 </div>
 
                 {/* Content */}
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-[#10a19d] transition-colors">
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold text-[#1E1E1E] mb-4 group-hover:text-[#2E7D32] transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-gray-600 mb-5 leading-relaxed">
+                  <p className="text-[#4A4A4A] mb-6 leading-relaxed">
                     {service.description}
                   </p>
-                  <ul className="space-y-2 mb-6">
+                  <ul className="space-y-3 mb-6">
                     {service.points.map((point, i) => (
                       <li
                         key={i}
-                        className="flex items-center text-gray-700 text-sm"
+                        className="flex items-center text-[#4A4A4A] text-sm"
                       >
-                        <CheckCircle className="h-4 w-4 text-[#10a19d] mr-2" />
-                        {point}
+                        <CheckCircle className="h-4 w-4 text-[#2E7D32] mr-3 flex-shrink-0" />
+                        <span>{point}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                {/* Button - Redirects to details page */}
+                {/* Button */}
                 <motion.button
                   whileHover={{ x: 5 }}
-                  onClick={() => navigate(service.link)} // ✅ Redirect on click
-                  className="flex items-center text-[#10a19d] font-semibold group-hover:text-[#10a19d] transition-colors"
+                  onClick={() => navigate(service.link)}
+                  className="flex items-center text-[#2E7D32] font-semibold hover:text-[#F28B30] transition-colors group/btn mt-4"
                 >
                   Learn More
-                  <ArrowRight className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="h-4 w-4 ml-2 transition-transform group-hover/btn:translate-x-1" />
                 </motion.button>
               </div>
             </motion.div>
@@ -225,38 +234,42 @@ const Services = () => {
 
         {/* Bottom CTA */}
         <motion.div
-          className="text-center mt-12"
+          className="text-center mt-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <div className="bg-gradient-to-r from-[#10a19d] to-[#0d817d] rounded-2xl p-8 text-white">
-            <h3 className="text-2xl font-bold mb-4">
-              Ready to Harness Solar Energy?
+          <div className="bg-linear-to-r from-[#2E7D32] to-[#4DB6E2] rounded-2xl p-10 text-white shadow-2xl">
+            <h3 className="text-2xl md:text-3xl font-bold mb-4">
+              Ready to Harness Solar Power?
             </h3>
-            <p className="text-white/90 mb-6 max-w-2xl mx-auto">
-              Get a personalized consultation and discover how our solar
-              solutions can transform your energy infrastructure and reduce
-              costs.
+            <p className="text-white/90 mb-8 max-w-2xl mx-auto text-lg leading-relaxed">
+              Get a personalized consultation and discover how our solar solutions can transform your energy infrastructure while reducing costs and environmental impact.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <motion.button
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ 
+                  scale: 1.05,
+                  boxShadow: "0 10px 30px rgba(244, 196, 48, 0.4)"
+                }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => navigate("/contact")} // ✅ Redirect to contact page
-                className="bg-white text-[#10a19d] px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl flex items-center gap-2"
+                onClick={() => navigate("/contact")}
+                className="bg-linear-to-r from-[#F28B30] to-[#F4C430] text-white px-8 py-4 rounded-xl font-bold hover:shadow-xl transition-all shadow-lg flex items-center gap-3"
               >
-                <Phone className="h-4 w-4" />
+                <Phone className="h-5 w-5" />
                 Get Free Consultation
               </motion.button>
               <motion.button
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ 
+                  scale: 1.05,
+                  backgroundColor: "rgba(255,255,255,0.1)"
+                }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => navigate("/products")} // ✅ Redirect to projects page
-                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-[#10a19d] transition-colors flex items-center gap-2"
+                onClick={() => navigate("/products")}
+                className="border-2 border-white/30 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/10 transition-all flex items-center gap-3 backdrop-blur-sm"
               >
-                <Eye className="h-4 w-4" />
+                <Eye className="h-5 w-5" />
                 View Our Products
               </motion.button>
             </div>

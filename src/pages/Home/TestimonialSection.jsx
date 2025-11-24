@@ -1,9 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";
 
 const TestimonialSection = () => {
   const clientsRef = useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   // Static testimonials data
   const testimonials = [
@@ -11,204 +12,265 @@ const TestimonialSection = () => {
       id: 1,
       name: "Rajesh Kumar",
       project: "2 MW Solar Plant - Akola",
-      quote:
-        "Navitas Efficens delivered our solar project with exceptional professionalism. The energy savings have been remarkable and the ROI exceeded our expectations.",
+      quote: "Navitas Efficens delivered our solar project with exceptional professionalism. The energy savings have been remarkable and the ROI exceeded our expectations.",
       rating: 5,
-      image:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+      category: "Large Scale",
+      savings: "75% energy cost reduction"
     },
     {
       id: 2,
       name: "Priya Sharma",
       project: "100 KW Industrial Rooftop - Nashik",
-      quote:
-        "The team at Navitas Efficens provided end-to-end solar solutions with outstanding expertise. Their maintenance support has been excellent.",
+      quote: "The team at Navitas Efficens provided end-to-end solar solutions with outstanding expertise. Their maintenance support has been excellent.",
       rating: 5,
-      image:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+      category: "Commercial",
+      savings: "60% lower electricity bills"
     },
     {
       id: 3,
       name: "Amit Patel",
       project: "Solar Tree Installation",
-      quote:
-        "From consultation to commissioning, Navitas provided excellent service. Our electricity bills have reduced by 80% and the system performance is outstanding.",
+      quote: "From consultation to commissioning, Navitas provided excellent service. Our electricity bills have reduced by 80% and the system performance is outstanding.",
       rating: 5,
-      image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+      category: "Innovation",
+      savings: "80% cost savings achieved"
     },
     {
       id: 4,
       name: "Sunita Desai",
       project: "1 MW Plant - Kopargaon",
-      quote:
-        "Navitas Efficens transformed our energy infrastructure with their solar expertise. The project was completed on time and within budget.",
+      quote: "Navitas Efficens transformed our energy infrastructure with their solar expertise. The project was completed on time and within budget.",
       rating: 5,
-      image:
-        "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+      image: "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+      category: "Industrial",
+      savings: "2.5 years ROI"
     },
     {
       id: 5,
       name: "Vikram Singh",
       project: "Commercial Solar Installation",
-      quote:
-        "The quality of work and attention to detail by Navitas team is exceptional. Highly recommended for any solar energy project.",
+      quote: "The quality of work and attention to detail by Navitas team is exceptional. Highly recommended for any solar energy project.",
       rating: 5,
-      image:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+      category: "Commercial",
+      savings: "70% energy independence"
     },
     {
       id: 6,
       name: "Meera Joshi",
       project: "Residential Solar System",
-      quote:
-        "Excellent service from start to finish. The team was professional, knowledgeable, and delivered exactly what was promised.",
+      quote: "Excellent service from start to finish. The team was professional, knowledgeable, and delivered exactly what was promised.",
       rating: 5,
-      image:
-        "https://images.unsplash.com/photo-1551836026-d5c88ac5d691?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+      image: "https://images.unsplash.com/photo-1551836026-d5c88ac5d691?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+      category: "Residential",
+      savings: "90% grid dependency reduced"
     },
   ];
 
   // Client testimonials carousel scroll
   const scrollClients = (direction) => {
     if (clientsRef.current) {
-      const scrollAmount = direction === "left" ? -300 : 300;
+      const scrollAmount = direction === "left" ? -400 : 400;
       clientsRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+      setCurrentIndex(prev => {
+        const newIndex = direction === "left" ? prev - 1 : prev + 1;
+        return Math.max(0, Math.min(newIndex, testimonials.length - 1));
+      });
+    }
+  };
+
+  const goToSlide = (index) => {
+    if (clientsRef.current) {
+      const scrollPosition = index * 416; // Approximate card width + gap
+      clientsRef.current.scrollTo({
+        left: scrollPosition,
+        behavior: "smooth",
+      });
+      setCurrentIndex(index);
     }
   };
 
   return (
-    <section className="bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        {/* Client Testimonials */}
-        <div className="mt-12">
-          <motion.h2
-            className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-4"
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-          >
-            {/* What Our Clients Say */}
-            <span className="text-black">What Our </span>
-            <span className="text-[#10a19d]">Clients Say</span>
-          </motion.h2>
+    <section className="py-20 bg-gradient-to-br from-[#F6F7F4] to-white relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 right-20 w-64 h-64 bg-[#F4C430]/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-20 w-80 h-80 bg-[#2E7D32]/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#4DB6E2]/5 rounded-full blur-3xl" />
+      </div>
 
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        {/* Header Section */}
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
           <motion.div
-            className="h-1 w-16 bg-[#10a19d] mx-auto mb-12"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2E7D32]/10 border border-[#2E7D32]/20 mb-6"
+          >
+            <Quote className="h-4 w-4 text-[#2E7D32]" />
+            <span className="text-sm font-semibold text-[#2E7D32] tracking-wide">
+              CLIENT TESTIMONIALS
+            </span>
+          </motion.div>
+
+          <h2 className="text-4xl md:text-5xl font-bold text-[#1E1E1E] mb-6">
+            Success <span className="bg-gradient-to-r from-[#F4C430] to-[#F28B30] bg-clip-text text-transparent">Stories</span>
+          </h2>
+          
+          <motion.div
+            className="h-1 w-20 bg-gradient-to-r from-[#F4C430] to-[#F28B30] mx-auto mb-6"
             initial={{ width: 0 }}
-            whileInView={{ width: "4rem" }}
+            whileInView={{ width: "5rem" }}
             transition={{ delay: 0.3, duration: 0.5 }}
             viewport={{ once: true }}
           />
+          
+          <p className="text-xl text-[#4A4A4A] max-w-3xl mx-auto leading-relaxed">
+            Discover how businesses and homeowners are transforming their energy infrastructure 
+            with our reliable solar solutions and achieving significant cost savings.
+          </p>
+        </motion.div>
 
-          <motion.p
-            className="text-xl text-gray-600 text-center max-w-3xl mx-auto mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
+        {/* Testimonials Carousel */}
+        <div className="relative">
+          {/* Navigation Arrows */}
+          <button
+            onClick={() => scrollClients("left")}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white/90 backdrop-blur-sm text-[#1E1E1E] p-4 rounded-full shadow-lg hover:shadow-xl hover:bg-white transition-all border border-[#D9DDDC] hover:scale-110 hidden md:flex items-center justify-center"
+            aria-label="Scroll left"
           >
-            Don't just take our word for it - hear from our satisfied customers
-            who have transformed their energy infrastructure with our solar
-            solutions.
-          </motion.p>
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          
+          <button
+            onClick={() => scrollClients("right")}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white/90 backdrop-blur-sm text-[#1E1E1E] p-4 rounded-full shadow-lg hover:shadow-xl hover:bg-white transition-all border border-[#D9DDDC] hover:scale-110 hidden md:flex items-center justify-center"
+            aria-label="Scroll right"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
 
-          <div className="relative">
-            <button
-              onClick={() => scrollClients("left")}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-[#10a19d] hover:bg-[#0d817d] text-white p-3 rounded-full shadow-lg hidden md:block transition-all hover:scale-110"
-              aria-label="Scroll left"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-            <button
-              onClick={() => scrollClients("right")}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-[#10a19d] hover:bg-[#0d817d] text-white p-3 rounded-full shadow-lg hidden md:block transition-all hover:scale-110"
-              aria-label="Scroll right"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-
-            <div
-              ref={clientsRef}
-              className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth py-4 px-2"
-              style={{
-                scrollbarWidth: "none",
-                msOverflowStyle: "none",
-              }}
-            >
-              {testimonials.map((client, index) => (
-                <motion.div
-                  key={client.id}
-                  className="min-w-[300px] sm:min-w-[400px] bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-300"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ y: -5 }}
-                >
-                  <div className="p-6">
-                    <div className="flex items-center gap-4 mb-4">
-                      <img
-                        src={client.image}
-                        alt={client.name}
-                        className="w-14 h-14 rounded-full object-cover border-2 border-[#10a19d]"
-                      />
-                      <div>
-                        <h4 className="font-bold text-gray-900 text-lg">
-                          {client.name}
-                        </h4>
-                        <p className="text-sm text-[#10a19d] font-medium">
-                          {client.project}
-                        </p>
-                      </div>
+          {/* Testimonials Container */}
+          <div
+            ref={clientsRef}
+            className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth py-4 px-2"
+            style={{
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+            }}
+          >
+            {testimonials.map((client, index) => (
+              <motion.div
+                key={client.id}
+                className="min-w-[350px] sm:min-w-[420px] bg-white rounded-2xl shadow-lg overflow-hidden border border-[#D9DDDC] hover:shadow-xl transition-all duration-500 group"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -8, scale: 1.02 }}
+              >
+                <div className="p-8">
+                  {/* Quote Icon */}
+                  <div className="flex justify-between items-start mb-6">
+                    <div 
+                      className="w-12 h-12 rounded-xl flex items-center justify-center"
+                      style={{ 
+                        background: `linear-gradient(135deg, #F4C43015, #F4C43030)`,
+                        border: `2px solid #F4C43020`
+                      }}
+                    >
+                      <Quote className="h-5 w-5 text-[#F4C430]" />
                     </div>
-                    <p className="text-gray-600 mb-6 leading-relaxed italic">
-                      "{client.quote}"
+                    
+                    {/* Category Badge */}
+                    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                      client.category === "Large Scale" 
+                        ? "bg-[#F4C430]/20 text-[#F28B30] border border-[#F4C430]/30"
+                        : client.category === "Commercial"
+                        ? "bg-[#4DB6E2]/20 text-[#4DB6E2] border border-[#4DB6E2]/30"
+                        : client.category === "Innovation"
+                        ? "bg-[#2E7D32]/20 text-[#2E7D32] border border-[#2E7D32]/30"
+                        : "bg-[#F28B30]/20 text-[#F28B30] border border-[#F28B30]/30"
+                    }`}>
+                      {client.category}
+                    </span>
+                  </div>
+
+                  {/* Testimonial Text */}
+                  <p className="text-[#4A4A4A] mb-6 leading-relaxed text-lg italic">
+                    "{client.quote}"
+                  </p>
+
+                  {/* Savings Highlight */}
+                  <div className="bg-gradient-to-r from-[#2E7D32]/10 to-[#4DB6E2]/10 rounded-xl p-4 mb-6 border border-[#2E7D32]/20">
+                    <p className="text-sm font-semibold text-[#2E7D32] text-center">
+                      {client.savings}
                     </p>
-                    <div className="flex gap-1 text-yellow-400">
-                      {[...Array(5)].map((_, i) => (
-                        <svg
-                          key={i}
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                          className="w-5 h-5"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      ))}
+                  </div>
+
+                  {/* Client Info */}
+                  <div className="flex items-center gap-4">
+                    <img
+                      src={client.image}
+                      alt={client.name}
+                      className="w-14 h-14 rounded-full object-cover border-2 border-[#4DB6E2] shadow-md"
+                    />
+                    <div className="flex-1">
+                      <h4 className="font-bold text-[#1E1E1E] text-lg">
+                        {client.name}
+                      </h4>
+                      <p className="text-[#4DB6E2] font-medium text-sm">
+                        {client.project}
+                      </p>
                     </div>
                   </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
 
-          {/* Dots indicator */}
-          <div className="flex justify-center mt-8 space-x-2">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                className="w-3 h-3 rounded-full bg-gray-300 hover:bg-[#10a19d] transition-colors"
-                onClick={() => {
-                  if (clientsRef.current) {
-                    const scrollPosition = index * 416; // Approximate card width + gap
-                    clientsRef.current.scrollTo({
-                      left: scrollPosition,
-                      behavior: "smooth",
-                    });
-                  }
-                }}
-              />
+                  {/* Rating */}
+                  <div className="flex gap-1 mt-4">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className="w-5 h-5 fill-[#F4C430] text-[#F4C430]"
+                      />
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
+
+        {/* Dots Indicator */}
+        <motion.div
+          className="flex justify-center mt-8 gap-2"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
+        >
+          {testimonials.map((_, index) => (
+            <button
+              key={index}
+              className={`w-3 h-3 rounded-full transition-all duration-300 hover:scale-125 ${
+                index === currentIndex
+                  ? "bg-gradient-to-r from-[#F4C430] to-[#F28B30] scale-125"
+                  : "bg-[#D9DDDC] hover:bg-[#4DB6E2]"
+              }`}
+              onClick={() => goToSlide(index)}
+              aria-label={`Go to testimonial ${index + 1}`}
+            />
+          ))}
+        </motion.div>
       </div>
     </section>
   );

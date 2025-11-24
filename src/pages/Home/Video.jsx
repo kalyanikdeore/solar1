@@ -1,19 +1,21 @@
-// YouTubeCarousel.jsx
 import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight, Play, Pause } from "lucide-react";
 
 const YouTubeCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
-  // Your YouTube video data
+  // Your YouTube video data - updated with solar-related content
   const videos = [
-    { id: "2nK34ik34UI", title: "Project Showcase 1" },
-    { id: "tBp7J6GI5VY", title: "Creative Process" },
-    { id: "ml1jWuXfZ58", title: "Behind the Scenes" },
-    { id: "DduhjZd3Haw", title: "Client Testimonial" },
-    { id: "A-N3uO0ODdc", title: "Final Results" },
-    { id: "8rKCghj3Xa0", title: "Making of Documentary" },
-    { id: "IcPXLnOQXC4", title: "Innovation in Action" },
-    { id: "bfSie8a1-_M", title: "Team Collaboration" },
+    { id: "2nK34ik34UI", title: "Solar Farm Installation", category: "Large Scale" },
+    { id: "tBp7J6GI5VY", title: "Rooftop Solar Project", category: "Commercial" },
+    { id: "ml1jWuXfZ58", title: "Solar Tree Innovation", category: "Innovation" },
+    { id: "DduhjZd3Haw", title: "Client Success Story", category: "Testimonial" },
+    { id: "A-N3uO0ODdc", title: "Solar Panel Manufacturing", category: "Behind Scenes" },
+    { id: "8rKCghj3Xa0", title: "Renewable Energy Impact", category: "Documentary" },
+    { id: "IcPXLnOQXC4", title: "Smart Solar Solutions", category: "Technology" },
+    { id: "bfSie8a1-_M", title: "Team Installation Process", category: "Process" },
   ];
 
   const totalVideos = videos.length;
@@ -30,19 +32,21 @@ const YouTubeCarousel = () => {
     setCurrentIndex(index);
   };
 
-  // Auto-play functionality (optional)
+  // Auto-play functionality
   useEffect(() => {
+    if (!isAutoPlaying) return;
+    
     const interval = setInterval(() => {
       nextVideo();
-    }, 8000); // Change video every 8 seconds
+    }, 6000); // Change video every 6 seconds
 
     return () => clearInterval(interval);
-  }, [currentIndex]);
+  }, [currentIndex, isAutoPlaying]);
 
   // Calculate visible videos for the carousel
   const getVisibleVideos = () => {
     const visible = [];
-    const totalVisible = 3; // Show 3 videos at a time (left, center, right)
+    const totalVisible = 3; // Show 3 videos at a time
 
     for (let i = -1; i <= 1; i++) {
       const index = (currentIndex + i + totalVideos) % totalVideos;
@@ -58,146 +62,186 @@ const YouTubeCarousel = () => {
   const visibleVideos = getVisibleVideos();
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-[#F6F7F4] to-white py-20 px-6 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-20 w-64 h-64 bg-[#F4C430]/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-20 w-80 h-80 bg-[#2E7D32]/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#4DB6E2]/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-[#10a19d] mb-4">
-            Our{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-700 to-gray-900">
-              Work Gallery
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2E7D32]/10 border border-[#2E7D32]/20 mb-6">
+            <Play className="h-4 w-4 text-[#2E7D32]" />
+            <span className="text-sm font-semibold text-[#2E7D32] tracking-wide">
+              PROJECT SHOWCASE
+            </span>
+          </div>
+          
+          <h2 className="text-4xl md:text-5xl font-bold text-[#1E1E1E] mb-4">
+            Solar Projects{" "}
+            <span className="bg-gradient-to-r from-[#F4C430] to-[#F28B30] bg-clip-text text-transparent">
+              Gallery
             </span>
           </h2>
-          <div
-            className="h-1 w-16 bg-[#10a19d] mx-auto mb-5"
+          
+          <motion.div
+            className="h-1 w-20 bg-gradient-to-r from-[#F4C430] to-[#F28B30] mx-auto mb-6"
             initial={{ width: 0 }}
-            whileInView={{ width: "4rem" }}
+            whileInView={{ width: "5rem" }}
             transition={{ delay: 0.3, duration: 0.5 }}
             viewport={{ once: true }}
           />
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Discover our latest projects and creative work in this curated
-            collection
+          
+          <p className="text-xl text-[#4A4A4A] max-w-3xl mx-auto leading-relaxed">
+            Explore our innovative solar installations and renewable energy projects that are powering a sustainable future
           </p>
-        </div>
+        </motion.div>
 
         {/* Video Carousel */}
         <div className="relative mb-16">
-          <div className="flex items-center justify-center space-x-2 md:space-x-4 lg:space-x-8">
-            {/* Previous Video (Left) */}
-            <div className="w-1/4 opacity-60 scale-90 transform transition-all duration-500">
-              <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                <div className="relative pb-[56.25%] h-0 overflow-hidden">
-                  <iframe
-                    className="absolute top-0 left-0 w-full h-full"
-                    src={`https://www.youtube.com/embed/${visibleVideos[0].id}`}
-                    title={visibleVideos[0].title}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              </div>
-            </div>
+          <div className="flex items-center justify-center gap-4 lg:gap-8">
+            <AnimatePresence mode="wait">
+              {visibleVideos.map((video, index) => (
+                <motion.div
+                  key={`${video.id}-${video.position}`}
+                  initial={{ 
+                    opacity: video.position === "center" ? 1 : 0.6,
+                    scale: video.position === "center" ? 1 : 0.85,
+                    x: video.position === "left" ? -50 : video.position === "right" ? 50 : 0
+                  }}
+                  animate={{ 
+                    opacity: video.position === "center" ? 1 : 0.6,
+                    scale: video.position === "center" ? 1 : 0.85,
+                    x: 0
+                  }}
+                  transition={{ duration: 0.5 }}
+                  className={`relative transition-all duration-500 ${
+                    video.position === "center" 
+                      ? "w-full lg:w-1/2 z-10" 
+                      : "w-1/4 hidden lg:block"
+                  }`}
+                >
+                  <div className={`bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-[#D9DDDC] ${
+                    video.position === "center" ? "shadow-2xl" : ""
+                  }`}>
+                    {/* Video Category Badge */}
+                    <div className="absolute top-4 left-4 z-20">
+                      <span className={`px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm ${
+                        video.category === "Large Scale" 
+                          ? "bg-[#F4C430]/20 text-[#F28B30] border border-[#F4C430]/30"
+                          : video.category === "Commercial"
+                          ? "bg-[#4DB6E2]/20 text-[#4DB6E2] border border-[#4DB6E2]/30"
+                          : video.category === "Innovation"
+                          ? "bg-[#2E7D32]/20 text-[#2E7D32] border border-[#2E7D32]/30"
+                          : "bg-[#F28B30]/20 text-[#F28B30] border border-[#F28B30]/30"
+                      }`}>
+                        {video.category}
+                      </span>
+                    </div>
 
-            {/* Current Video (Center) */}
-            <div className="w-1/2 transform transition-all duration-500 scale-100 z-10">
-              <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
-                <div className="relative pb-[56.25%] h-0 overflow-hidden">
-                  <iframe
-                    className="absolute top-0 left-0 w-full h-full"
-                    src={`https://www.youtube.com/embed/${visibleVideos[1].id}?autoplay=1`}
-                    title={visibleVideos[1].title}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              </div>
-            </div>
-
-            {/* Next Video (Right) */}
-            <div className="w-1/4 opacity-60 scale-90 transform transition-all duration-500">
-              <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                <div className="relative pb-[56.25%] h-0 overflow-hidden">
-                  <iframe
-                    className="absolute top-0 left-0 w-full h-full"
-                    src={`https://www.youtube.com/embed/${visibleVideos[2].id}`}
-                    title={visibleVideos[2].title}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              </div>
-            </div>
+                    <div className="relative pb-[56.25%] h-0 overflow-hidden rounded-t-2xl">
+                      <iframe
+                        className="absolute top-0 left-0 w-full h-full"
+                        src={`https://www.youtube.com/embed/${video.id}${video.position === "center" ? '?autoplay=1&mute=1' : ''}`}
+                        title={video.title}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerPolicy="strict-origin-when-cross-origin"
+                        allowFullScreen
+                      />
+                    </div>
+                    
+                    {/* Video Title */}
+                    <div className="p-4 bg-white">
+                      <h3 className={`font-semibold text-[#1E1E1E] ${
+                        video.position === "center" ? "text-lg" : "text-sm"
+                      }`}>
+                        {video.title}
+                      </h3>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </div>
 
           {/* Navigation Arrows */}
           <button
             onClick={prevVideo}
-            className="absolute left-0 md:left-2 lg:left-4 top-1/2 transform -translate-y-1/2 bg-[#10a19d] text-white p-2 md:p-3 rounded-full shadow-lg hover:bg-[#0d8c89] transition-all duration-300 z-20"
+            className="absolute left-2 lg:left-4 top-1/2 transform -translate-y-1/2 bg-white/90 backdrop-blur-sm text-[#1E1E1E] p-3 rounded-full shadow-lg hover:shadow-xl hover:bg-white transition-all duration-300 z-20 border border-[#D9DDDC] hover:scale-110"
             aria-label="Previous video"
           >
-            <svg
-              className="w-4 h-4 md:w-6 md:h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
+            <ChevronLeft className="w-5 h-5 lg:w-6 lg:h-6" />
           </button>
 
           <button
             onClick={nextVideo}
-            className="absolute right-0 md:right-2 lg:right-4 top-1/2 transform -translate-y-1/2 bg-[#10a19d] text-white p-2 md:p-3 rounded-full shadow-lg hover:bg-[#0d8c89] transition-all duration-300 z-20"
+            className="absolute right-2 lg:right-4 top-1/2 transform -translate-y-1/2 bg-white/90 backdrop-blur-sm text-[#1E1E1E] p-3 rounded-full shadow-lg hover:shadow-xl hover:bg-white transition-all duration-300 z-20 border border-[#D9DDDC] hover:scale-110"
             aria-label="Next video"
           >
-            <svg
-              className="w-4 h-4 md:w-6 md:h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
+            <ChevronRight className="w-5 h-5 lg:w-6 lg:h-6" />
+          </button>
+
+          {/* Auto-play Toggle */}
+          <button
+            onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+            className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-[#1E1E1E] p-2 rounded-full shadow-lg hover:shadow-xl hover:bg-white transition-all duration-300 z-20 border border-[#D9DDDC]"
+            aria-label={isAutoPlaying ? "Pause auto-play" : "Play auto-play"}
+          >
+            {isAutoPlaying ? (
+              <Pause className="w-4 h-4" />
+            ) : (
+              <Play className="w-4 h-4" />
+            )}
           </button>
         </div>
 
         {/* Video Indicators */}
-        <div className="flex flex-col items-center space-y-6 md:space-y-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
+          className="flex flex-col items-center space-y-6"
+        >
           {/* Dot Indicators */}
-          <div className="flex justify-center space-x-2 md:space-x-3 flex-wrap">
+          <div className="flex justify-center gap-2 flex-wrap">
             {videos.map((_, index) => (
               <button
                 key={index}
                 onClick={() => goToVideo(index)}
-                className={`w-2 h-1 md:w-4 md:h-1 rounded-full transition-all duration-300 ${
+                className={`w-3 h-3 rounded-full transition-all duration-300 hover:scale-125 ${
                   index === currentIndex
-                    ? "bg-[#10a19d] scale-125"
-                    : "bg-gray-300 hover:bg-gray-400"
+                    ? "bg-gradient-to-r from-[#F4C430] to-[#F28B30] scale-125"
+                    : "bg-[#D9DDDC] hover:bg-[#4DB6E2]"
                 }`}
                 aria-label={`Go to video ${index + 1}`}
               />
             ))}
           </div>
-        </div>
+
+          {/* Video Counter */}
+          <div className="text-center">
+            <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 border border-[#D9DDDC]">
+              <span className="text-lg font-bold text-[#1E1E1E]">
+                {String(currentIndex + 1).padStart(2, '0')}
+              </span>
+              <span className="text-[#4A4A4A]">/</span>
+              <span className="text-[#4A4A4A]">
+                {String(totalVideos).padStart(2, '0')}
+              </span>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
