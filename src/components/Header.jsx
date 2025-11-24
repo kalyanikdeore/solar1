@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, ChevronRight, Sun } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight, Sun, Phone } from "lucide-react";
 import { Logo } from "../assets";
 
 const Header = () => {
@@ -36,22 +36,22 @@ const Header = () => {
       {
         label: "Products",
         path: "/products",
-        subItems: [
-          { name: "Solar Panels", href: "/products" },
-          { name: "Inverters", href: "/products" },
-          { name: "Mounting Systems", href: "/products" },
-          { name: "BOS Components", href: "/products" },
-        ],
+        // subItems: [
+        //   { name: "Solar Panels", href: "/products" },
+        //   { name: "Inverters", href: "/products" },
+        //   { name: "Mounting Systems", href: "/products" },
+        //   { name: "BOS Components", href: "/products" },
+        // ],
       },
       {
         label: "Services",
         path: "/services",
-        subItems: [
-          { name: "Solar EPC", href: "/services" },
-          { name: "Consultancy", href: "/services" },
-          { name: "Skill Development", href: "/services" },
-          { name: "Maintenance", href: "/services" },
-        ],
+        // subItems: [
+        //   { name: "Solar EPC", href: "/services" },
+        //   { name: "Consultancy", href: "/services" },
+        //   { name: "Skill Development", href: "/services" },
+        //   { name: "Maintenance", href: "/services" },
+        // ],
       },
       { label: "Gallery", path: "/gallery" },
       { label: "Contact", path: "/contact" },
@@ -60,7 +60,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 30);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -100,7 +100,6 @@ const Header = () => {
   const handleAboutSectionClick = (sectionId) => {
     closeAllMenus();
     if (location.pathname === "/about") {
-      // If already on about page, scroll to section
       setTimeout(() => {
         const element = document.getElementById(sectionId);
         if (element) {
@@ -110,20 +109,30 @@ const Header = () => {
     }
   };
 
-  // Determine background color based on page and scroll
+  // Determine background color based on scroll - ALWAYS transparent when not scrolled
   const getNavbarBackground = () => {
-    if (!isHomePage) {
-      return "bg-white shadow-lg"; // Always white for non-home pages
-    }
-    return scrolled ? "bg-white shadow-lg" : "bg-transparent"; // Transparent only on home page when not scrolled
+    return scrolled ? "bg-white shadow-md" : "bg-transparent";
   };
 
   // Determine text color based on page and scroll
   const getTextColor = () => {
     if (!isHomePage) {
-      return "text-gray-800"; // Always dark for non-home pages
+      return "text-[#1E1E1E]"; // Always dark for non-home pages
     }
-    return scrolled ? "text-gray-800" : "text-white"; // White only on home page when not scrolled
+    return scrolled ? "text-[#1E1E1E]" : "text-white"; // White only on home page when not scrolled
+  };
+
+  // Determine quote button style based on page and scroll state
+  const getQuoteButtonStyle = () => {
+    if (!isHomePage) {
+      // Always gradient background for non-home pages
+      return "bg-linear-to-r from-[#F28B30] to-[#F4C430] text-white";
+    } else {
+      // Home page: gradient when scrolled, glass morphism when not scrolled
+      return scrolled 
+        ? "bg-linear-to-r from-[#F28B30] to-[#F4C430] text-white" 
+        : "bg-white/20 backdrop-blur-sm text-white border border-white/30";
+    }
   };
 
   return (
@@ -131,18 +140,14 @@ const Header = () => {
       {/* Main Navbar */}
       <motion.nav
         className={`${getNavbarBackground()} transition-all duration-300`}
-        initial={{ padding: "16px 0" }}
+        initial={{ padding: "12px 0" }}
         animate={{
-          padding: scrolled ? "8px 0" : "16px 0",
-          backgroundColor: !isHomePage
-            ? "rgba(255,255,255,0.95)"
-            : scrolled
-            ? "rgba(255,255,255,0.95)"
-            : "rgba(255,255,255,0)",
+          padding: scrolled ? "6px 0" : "12px 0",
+          backgroundColor: scrolled ? "rgba(255,255,255,0.98)" : "rgba(255,255,255,0)",
         }}
       >
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center z-200">
-          {/* Logo */}
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center z-20">
+          {/* Logo - Smaller size */}
           <motion.div
             className="flex items-center"
             whileHover={{ scale: 1.03 }}
@@ -150,7 +155,7 @@ const Header = () => {
             <Link to="/" className="flex items-center space-x-2">
               <img
                 src={Logo}
-                className="w-64 h-16 md:w-96 md:h-24"
+                className="w-48 h-12 md:w-64 md:h-16"
                 alt="Navitas Efficens Logo"
               />
             </Link>
@@ -174,7 +179,7 @@ const Header = () => {
                 <motion.div className="relative">
                   <Link
                     to={item.path}
-                    className={`flex items-center ${getTextColor()} hover:text-[#10a19d] transition-colors px-4 py-2 font-medium uppercase tracking-wider text-sm relative`}
+                    className={`flex items-center ${getTextColor()} hover:text-[#F4C430] transition-colors px-3 py-2 font-medium uppercase tracking-wider text-xs relative`}
                   >
                     <span className="whitespace-nowrap">{item.label}</span>
                     {item.subItems && (
@@ -192,7 +197,7 @@ const Header = () => {
 
                     {hoveredItem === item.label && (
                       <motion.div
-                        className="absolute bottom-0 left-0 w-full h-0.5 bg-[#10a19d]"
+                        className="absolute bottom-0 left-0 w-full h-0.5 bg-linear-to-r from-[#F4C430] to-[#2E7D32]"
                         layoutId="navUnderline"
                         initial={{ width: 0 }}
                         animate={{ width: "100%" }}
@@ -212,7 +217,7 @@ const Header = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
-                    className="absolute left-0 top-full w-64 bg-white rounded-lg shadow-xl z-50 border border-gray-100"
+                    className="absolute left-0 top-full w-56 bg-white rounded-xl shadow-xl z-50 border border-[#D9DDDC]"
                     onMouseEnter={() => setOpenDropdown(item.label)}
                     onMouseLeave={() => {
                       if (!openSubDropdown) setOpenDropdown(null);
@@ -223,7 +228,7 @@ const Header = () => {
                         <div key={subItem.name} className="relative">
                           <Link
                             to={subItem.href}
-                            className="flex items-center justify-between w-full px-4 py-3 text-sm text-gray-700 hover:bg-[#10a19d] hover:text-white transition-colors border-b border-gray-100 last:border-b-0"
+                            className="flex items-center w-full px-3 py-2 text-xs text-[#4A4A4A] hover:bg-linear-to-r hover:from-[#2E7D32] hover:to-[#4DB6E2] hover:text-white transition-all duration-300 border-b border-[#D9DDDC] last:border-b-0"
                             onClick={() => {
                               if (
                                 subItem.href.includes("#") &&
@@ -247,16 +252,18 @@ const Header = () => {
               </div>
             ))}
 
+            {/* Get Quote Button */}
             <motion.a
-              href="/contact"
-              className="ml-4 bg-gradient-to-r from-[#10a19d] to-[#0d817d] hover:from-[#0d817d] hover:to-[#10a19d] text-white px-6 py-2 rounded-lg font-semibold uppercase tracking-wider text-sm shadow-lg hover:shadow-xl transition-all"
+              href="tel:+919822561464"
+              className={`ml-3 ${getQuoteButtonStyle()} px-4 py-2 rounded-lg font-semibold uppercase tracking-wider text-xs shadow-lg hover:shadow-xl transition-all flex items-center gap-2`}
               whileHover={{
                 scale: 1.05,
-                boxShadow: "0 5px 15px rgba(16, 161, 157, 0.4)",
+                boxShadow: "0 5px 15px rgba(242, 139, 48, 0.4)",
               }}
               whileTap={{ scale: 0.98 }}
             >
-              Get Quote
+              <Phone className="h-3 w-3" />
+              Call Now
             </motion.a>
           </div>
 
@@ -267,38 +274,38 @@ const Header = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </motion.button>
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Always has white background */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
-            className="fixed inset-0 bg-white z-40 lg:hidden overflow-y-auto pt-20"
+            className="fixed inset-0 bg-white z-40 lg:hidden overflow-y-auto pt-16"
           >
-            <div className="max-w-7xl mx-auto px-6 py-4 flex justify-end">
+            <div className="max-w-7xl mx-auto px-6 py-3 flex justify-end">
               <button
                 onClick={closeAllMenus}
-                className="text-gray-800 p-2 rounded-full hover:bg-gray-100 transition-colors"
+                className="text-[#1E1E1E] p-2 rounded-full hover:bg-[#F6F7F4] transition-colors"
               >
-                <X className="h-6 w-6" />
+                <X className="h-5 w-5" />
               </button>
             </div>
             <div className="max-w-7xl mx-auto px-6">
               <div className="grid gap-1">
                 {navData.navigation.map((item) => (
-                  <div key={item.label} className="border-b border-gray-100">
+                  <div key={item.label} className="border-b border-[#D9DDDC]">
                     {item.subItems ? (
                       <>
                         <div className="flex items-center">
                           <Link
                             to={item.path}
-                            className="flex-1 flex items-center py-4 text-lg text-gray-800 font-semibold"
+                            className="flex-1 flex items-center py-3 text-base text-[#1E1E1E] font-semibold"
                             onClick={closeAllMenus}
                           >
                             <span className="ml-3">{item.label}</span>
@@ -332,16 +339,16 @@ const Header = () => {
                               initial={{ opacity: 0, height: 0 }}
                               animate={{ opacity: 1, height: "auto" }}
                               exit={{ opacity: 0, height: 0 }}
-                              className="pl-8 overflow-hidden"
+                              className="pl-6 overflow-hidden"
                             >
                               {item.subItems.map((subItem) => (
                                 <div
                                   key={subItem.name}
-                                  className="border-t border-gray-100"
+                                  className="border-t border-[#D9DDDC]"
                                 >
                                   <Link
                                     to={subItem.href}
-                                    className="block py-3 text-sm text-gray-600 hover:text-[#10a19d] transition-colors"
+                                    className="block py-2 text-sm text-[#4A4A4A] hover:text-[#2E7D32] transition-colors"
                                     onClick={() => {
                                       if (
                                         subItem.href.includes("#") &&
@@ -366,7 +373,7 @@ const Header = () => {
                     ) : (
                       <Link
                         to={item.path}
-                        className="flex items-center py-4 text-lg text-gray-800 font-semibold"
+                        className="flex items-center py-3 text-base text-[#1E1E1E] font-semibold"
                         onClick={closeAllMenus}
                       >
                         <span className="ml-3">{item.label}</span>
@@ -376,14 +383,15 @@ const Header = () => {
                 ))}
               </div>
 
-              <div className="mt-8">
-                <Link
-                  to="/contact"
-                  className="block w-full bg-gradient-to-r from-[#10a19d] to-[#0d817d] text-white px-6 py-4 rounded-lg font-semibold uppercase tracking-wider text-center text-lg shadow-lg"
+              <div className="mt-6">
+                <a
+                  href="tel:+919822561464"
+                  className="block w-full bg-linear-to-r from-[#F28B30] to-[#F4C430] text-white px-4 py-3 rounded-lg font-semibold uppercase tracking-wider text-center text-sm shadow-lg flex items-center justify-center gap-2"
                   onClick={closeAllMenus}
                 >
-                  Get Quote
-                </Link>
+                  <Phone className="h-4 w-4" />
+                  Call +91 98225 61464
+                </a>
               </div>
             </div>
           </motion.div>
