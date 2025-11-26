@@ -16,7 +16,7 @@ import WhatsAppPopup from "./components/PopUp/WhatsAppPopup";
 function App() {
   return (
     <div className="App">
-      {/* <ScrollToTop /> */}
+      <ScrollToTop />
       <Header />
       <main>
         <Routes>
