@@ -126,11 +126,11 @@ const Header = () => {
   const getQuoteButtonStyle = () => {
     if (!isHomePage) {
       // Always gradient background for non-home pages
-      return "bg-linear-to-r from-[#F28B30] to-[#F4C430] text-white";
+      return "bg-gradient-to-r from-[#F28B30] to-[#F4C430] text-white";
     } else {
       // Home page: gradient when scrolled, glass morphism when not scrolled
       return scrolled 
-        ? "bg-linear-to-r from-[#F28B30] to-[#F4C430] text-white" 
+        ? "bg-gradient-to-r from-[#F28B30] to-[#F4C430] text-white" 
         : "bg-white/20 backdrop-blur-sm text-white border border-white/30";
     }
   };
@@ -155,7 +155,7 @@ const Header = () => {
             <Link to="/" className="flex items-center space-x-2">
               <img
                 src={Logo}
-                className="w-48 h-12 md:w-64 md:h-16"
+                className="w-48 h-12 md:w-48 md:h-24 object-contain"
                 alt="Navitas Efficens Logo"
               />
             </Link>
@@ -197,7 +197,7 @@ const Header = () => {
 
                     {hoveredItem === item.label && (
                       <motion.div
-                        className="absolute bottom-0 left-0 w-full h-0.5 bg-linear-to-r from-[#F4C430] to-[#2E7D32]"
+                        className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-[#F4C430] to-[#2E7D32]"
                         layoutId="navUnderline"
                         initial={{ width: 0 }}
                         animate={{ width: "100%" }}
@@ -228,7 +228,7 @@ const Header = () => {
                         <div key={subItem.name} className="relative">
                           <Link
                             to={subItem.href}
-                            className="flex items-center w-full px-3 py-2 text-xs text-[#4A4A4A] hover:bg-linear-to-r hover:from-[#2E7D32] hover:to-[#4DB6E2] hover:text-white transition-all duration-300 border-b border-[#D9DDDC] last:border-b-0"
+                            className="flex items-center w-full px-3 py-2 text-xs text-[#4A4A4A] hover:bg-gradient-to-r hover:from-[#2E7D32] hover:to-[#4DB6E2] hover:text-white transition-all duration-300 border-b border-[#D9DDDC] last:border-b-0"
                             onClick={() => {
                               if (
                                 subItem.href.includes("#") &&
@@ -386,7 +386,7 @@ const Header = () => {
               <div className="mt-6">
                 <a
                   href="tel:+919822561464"
-                  className="block w-full bg-linear-to-r from-[#F28B30] to-[#F4C430] text-white px-4 py-3 rounded-lg font-semibold uppercase tracking-wider text-center text-sm shadow-lg flex items-center justify-center gap-2"
+                  className="block w-full bg-gradient-to-r from-[#F28B30] to-[#F4C430] text-white px-4 py-3 rounded-lg font-semibold uppercase tracking-wider text-center text-sm shadow-lg flex items-center justify-center gap-2"
                   onClick={closeAllMenus}
                 >
                   <Phone className="h-4 w-4" />

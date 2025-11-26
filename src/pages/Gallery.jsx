@@ -355,76 +355,93 @@ const GalleryPage = () => {
         )}
 
         {/* Modal */}
-        <AnimatePresence>
-          {selectedImage && (
-            <motion.div
-              className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-start justify-center z-999 p-4 pt-24"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedImage(null)}
+        {/* Modal */}
+<AnimatePresence>
+  {selectedImage && (
+    <motion.div
+      className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={() => setSelectedImage(null)}
+    >
+      <motion.div
+        className="relative bg-white rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] w-full max-w-sm sm:max-w-md lg:max-w-2xl xl:max-w-4xl mx-auto flex flex-col"
+        initial={{ opacity: 0, scale: 0.8, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.8, y: 20 }}
+        transition={{ type: "spring", damping: 25 }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Image Section */}
+        <div className="relative h-48 sm:h-64 lg:h-80 xl:h-96 overflow-hidden bg-gray-100 flex items-center justify-center">
+          <ImageWithFallback
+            src={selectedImage.url}
+            alt={selectedImage.title}
+            className="w-full h-full object-contain"
+            fallbackText={selectedImage.title}
+          />
+          
+          {/* Close Button */}
+          <motion.button
+            className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-white/90 backdrop-blur-sm text-[#1E1E1E] rounded-full p-2 hover:bg-white transition-all duration-300 border border-[#D9DDDC] shadow-lg"
+            onClick={() => setSelectedImage(null)}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <X className="w-4 h-4 sm:w-5 sm:h-5" />
+          </motion.button>
+        </div>
+
+        {/* Modal Content - Scrollable */}
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+          {/* Header */}
+          <div className="flex items-start gap-3 sm:gap-4 mb-4 sm:mb-6">
+            <div
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0"
+              style={{
+                background: `linear-gradient(135deg, ${selectedImage.color}15, ${selectedImage.color}30)`,
+                border: `2px solid ${selectedImage.color}20`
+              }}
             >
-              <motion.div
-                className="relative max-w-4xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden"
-                initial={{ opacity: 0, scale: 0.8, y: -20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="h-96 overflow-hidden">
-                  <ImageWithFallback
-                    src={selectedImage.url}
-                    alt={selectedImage.title}
-                    className="w-full h-full object-contain"
-                    fallbackText={selectedImage.title}
-                  />
-                </div>
+              <selectedImage.icon className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: selectedImage.color }} />
+            </div>
+            <div className="min-w-0 flex-1">
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#1E1E1E] leading-tight break-words">
+                {selectedImage.title}
+              </h3>
+              <p className="text-[#4A4A4A] text-sm sm:text-base mt-1 break-words">
+                {selectedImage.subtitle}
+              </p>
+            </div>
+          </div>
 
-                {/* Close Button */}
-                <motion.button
-                  className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-[#1E1E1E] rounded-full p-2 hover:bg-white transition-all duration-300 border border-[#D9DDDC] hover:scale-110"
-                  onClick={() => setSelectedImage(null)}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <X className="w-5 h-5" />
-                </motion.button>
+          {/* Project Details Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+            <div className="bg-[#F6F7F4] rounded-lg sm:rounded-xl p-3 sm:p-4">
+              <div className="font-semibold text-[#1E1E1E] text-sm sm:text-base mb-1 sm:mb-2">Capacity</div>
+              <div className="text-[#4A4A4A] text-sm sm:text-base break-words">{selectedImage.capacity}</div>
+            </div>
+            <div className="bg-[#F6F7F4] rounded-lg sm:rounded-xl p-3 sm:p-4">
+              <div className="font-semibold text-[#1E1E1E] text-sm sm:text-base mb-1 sm:mb-2">Project Type</div>
+              <div className="text-[#4A4A4A] text-sm sm:text-base break-words">{selectedImage.type}</div>
+            </div>
+          </div>
 
-                {/* Modal Content */}
-                <div className="p-8">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div
-                      className="w-12 h-12 rounded-xl flex items-center justify-center"
-                      style={{
-                        background: `linear-gradient(135deg, ${selectedImage.color}15, ${selectedImage.color}30)`,
-                        border: `2px solid ${selectedImage.color}20`
-                      }}
-                    >
-                      <selectedImage.icon className="w-6 h-6" style={{ color: selectedImage.color }} />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold text-[#1E1E1E]">
-                        {selectedImage.title}
-                      </h3>
-                      <p className="text-[#4A4A4A]">{selectedImage.subtitle}</p>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4 text-sm">
-                    <div className="bg-[#F6F7F4] rounded-xl p-4">
-                      <div className="font-semibold text-[#1E1E1E] mb-1">Capacity</div>
-                      <div className="text-[#4A4A4A]">{selectedImage.capacity}</div>
-                    </div>
-                    <div className="bg-[#F6F7F4] rounded-xl p-4">
-                      <div className="font-semibold text-[#1E1E1E] mb-1">Project Type</div>
-                      <div className="text-[#4A4A4A]">{selectedImage.type}</div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
+          {/* Additional Content Area (if needed) */}
+          {selectedImage.description && (
+            <div className="mt-4 sm:mt-6">
+              <div className="font-semibold text-[#1E1E1E] text-sm sm:text-base mb-2">Project Details</div>
+              <p className="text-[#4A4A4A] text-sm sm:text-base leading-relaxed">
+                {selectedImage.description}
+              </p>
+            </div>
           )}
-        </AnimatePresence>
+        </div>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
       </div>
     </div>
   );

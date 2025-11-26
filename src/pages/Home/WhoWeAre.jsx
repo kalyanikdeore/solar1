@@ -85,128 +85,131 @@ const WhoWeAre = () => {
           </p>
         </motion.div>
 
-        <div className="space-y-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            {/* Left Column: Process Steps & CTA */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="space-y-8"
-            >
-              {/* Our Approach */}
-              <div>
-                <h3 className="text-2xl font-bold text-[#1E1E1E] mb-8">
-                  Our Solar Approach
-                </h3>
-                <div className="space-y-6">
-                  {processSteps.map((step, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, delay: 0.1 * index }}
-                      viewport={{ once: true }}
-                      whileHover={{ scale: 1.02, x: 5 }}
-                      className="flex items-start space-x-6 p-6 bg-white rounded-2xl shadow-lg border border-[#D9DDDC] hover:shadow-xl transition-all duration-300"
-                    >
-                      <div
-                        className="flex-shrink-0 w-14 h-14 rounded-xl flex items-center justify-center shadow-lg"
-                        style={{
-                          background: `linear-gradient(135deg, ${step.color}15, ${step.color}30)`,
-                          border: `2px solid ${step.color}20`
-                        }}
-                      >
-                        <step.icon size={24} style={{ color: step.color }} />
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="font-bold text-[#1E1E1E] text-lg mb-2">
-                          {step.title}
-                        </h4>
-                        <p className="text-[#4A4A4A] leading-relaxed">
-                          {step.text}
-                        </p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Right Column: Image with Floating Elements */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              {/* Main Image Container */}
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
-                <img
-                  src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                  alt="Solar panel installation by Navitas Efficens"
-                  className="w-full h-[500px] object-cover"
-                />
-                {/* Image Overlay Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1E1E1E]/30 to-transparent" />
-              </div>
-
-              {/* Trusted By Bar */}
+        <div>
+  {/* Process & Image Section */}
+  <div className="space-y-16">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+      {/* Left Column: Process Steps */}
+      <motion.div
+        initial={{ opacity: 0, x: -30 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        viewport={{ once: true }}
+        className="space-y-8"
+      >
+        {/* Our Approach */}
+        <div>
+          <h3 className="text-2xl font-bold text-[#1E1E1E] mb-8">
+            Our Solar Approach
+          </h3>
+          <div className="space-y-6">
+            {processSteps.map((step, index) => (
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 1 }}
+                key={index}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 * index }}
                 viewport={{ once: true }}
-                className="absolute -bottom-18 left-6 right-6 bg-gradient-to-r from-[#2E7D32] to-[#4DB6E2] text-white rounded-2xl shadow-lg p-6"
+                whileHover={{ scale: 1.02, x: 5 }}
+                className="flex items-start space-x-6 p-6 bg-white rounded-2xl shadow-lg border border-[#D9DDDC] hover:shadow-xl transition-all duration-300"
               >
-                <div className="text-center">
-                  <div className="flex items-center justify-center gap-2 mb-3">
-                    <Award className="w-5 h-5" />
-                    <p className="font-semibold text-lg">Trusted By Industry Leaders</p>
-                  </div>
-                  <div className="flex flex-wrap justify-center gap-6 text-sm font-medium opacity-90">
-                    {trustedPartners.map((partner, index) => (
-                      <motion.span
-                        key={index}
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        transition={{ delay: 0.2 * index }}
-                        className="hover:text-[#F4C430] transition-colors cursor-pointer"
-                      >
-                        {partner}
-                      </motion.span>
-                    ))}
-                  </div>
+                <div
+                  className="flex-shrink-0 w-14 h-14 rounded-xl flex items-center justify-center shadow-lg"
+                  style={{
+                    background: `linear-gradient(135deg, ${step.color}15, ${step.color}30)`,
+                    border: `2px solid ${step.color}20`
+                  }}
+                >
+                  <step.icon size={24} style={{ color: step.color }} />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-bold text-[#1E1E1E] text-lg mb-2">
+                    {step.title}
+                  </h4>
+                  <p className="text-[#4A4A4A] leading-relaxed">
+                    {step.text}
+                  </p>
                 </div>
               </motion.div>
-            </motion.div>
+            ))}
           </div>
         </div>
-        
-        {/* CTA Button */}
+      </motion.div>
+
+      {/* Right Column: Image with Floating Elements */}
+      <motion.div
+        initial={{ opacity: 0, x: 30 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        viewport={{ once: true }}
+        className="relative"
+      >
+        {/* Main Image Container */}
+        <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+          <img
+            src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            alt="Solar panel installation by Navitas Efficens"
+            className="w-full h-[500px] object-cover"
+          />
+          {/* Image Overlay Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1E1E1E]/30 to-transparent" />
+        </div>
+
+        {/* Trusted By Bar */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          transition={{ duration: 0.6, delay: 1 }}
           viewport={{ once: true }}
-          className="pt-28 sm:pt-12 flex justify-center"
+          className="absolute -bottom-8 left-6 right-6 bg-gradient-to-r from-[#2E7D32] to-[#4DB6E2] text-white rounded-2xl shadow-lg p-6"
         >
-          <motion.button
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0 20px 40px rgba(244, 196, 48, 0.3)"
-            }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => navigate("/about")}
-            className="bg-gradient-to-r from-[#F28B30] to-[#F4C430] text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center group"
-          >
-            Explore Our Mission
-            <ArrowRight className="ml-3 h-5 w-5 transition-transform group-hover:translate-x-1" />
-          </motion.button>
+          <div className="text-center">
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <Award className="w-5 h-5" />
+              <p className="font-semibold text-lg">Trusted By Industry Leaders</p>
+            </div>
+            <div className="flex flex-wrap justify-center gap-6 text-sm font-medium opacity-90">
+              {trustedPartners.map((partner, index) => (
+                <motion.span
+                  key={index}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ delay: 0.2 * index }}
+                  className="hover:text-[#F4C430] transition-colors cursor-pointer"
+                >
+                  {partner}
+                </motion.span>
+              ))}
+            </div>
+          </div>
         </motion.div>
-      </div>
+      </motion.div>
+    </div>
+  </div>
+
+  {/* CTA Button - MOVED OUTSIDE the main content section */}
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6, delay: 0.8 }}
+    viewport={{ once: true }}
+    className="flex justify-center w-full px-4 sm:px-6 lg:px-8 mt-16 sm:mt-20 lg:mt-24"
+  >
+    <motion.button
+      whileHover={{
+        scale: 1.05,
+        boxShadow: "0 20px 40px rgba(244, 196, 48, 0.3)"
+      }}
+      whileTap={{ scale: 0.95 }}
+      onClick={() => navigate("/about")}
+      className="bg-gradient-to-r from-[#F28B30] to-[#F4C430] text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center group w-full sm:w-auto text-base sm:text-lg min-h-[60px] sm:min-h-0"
+    >
+      Explore Our Mission
+      <ArrowRight className="ml-3 h-5 w-5 transition-transform group-hover:translate-x-1" />
+    </motion.button>
+  </motion.div>
+</div>
+</div>
     </section>
   );
 };
