@@ -79,7 +79,7 @@ function WhatsAppPopup() {
                   <div className="grid grid-cols-2 gap-2 ml-6">
                     {/* WhatsApp Button */}
                     <a
-                      href={`https://wa.me/${branch.whatsapp}?text=Hello%20Dr.%20Joshi's%20Care%20%26%20Cure%20Dental%20Clinic,%20I%20would%20like%20to%20know%20more%20about%20your%20services`}
+                      href={`https://wa.me/${branch.whatsapp}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`flex items-center justify-center bg-${branch.color}-500 hover:bg-${branch.color}-600 text-white px-2 py-2 rounded transition-colors text-sm`}

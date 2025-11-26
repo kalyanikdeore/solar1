@@ -272,32 +272,35 @@ export default function ServicesSection() {
         </div>
 
         {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="text-center mt-16"
-        >
-          <div className="bg-gradient-to-r from-[#2E7D32] to-[#4DB6E2] rounded-2xl p-10 text-white shadow-2xl">
-            <h3 className="text-2xl md:text-3xl font-bold mb-4">
-              Ready to Start Your Solar Project?
-            </h3>
-            <p className="text-white/90 mb-8 max-w-2xl mx-auto text-lg leading-relaxed">
-              Get expert consultation and discover how our comprehensive solar services 
-              can transform your energy infrastructure and reduce costs.
-            </p>
-            <motion.button
-            onClick={() => navigate('/contact')}
-              whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(244, 196, 48, 0.4)" }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-[#F28B30] to-[#F4C430] text-white px-8 py-4 rounded-xl font-bold hover:shadow-xl transition-all shadow-lg flex items-center gap-3 mx-auto"
-            >
-              <Sun className="h-5 w-5" />
-              Get Free Consultation
-            </motion.button>
-          </div>
-        </motion.div>
+<motion.div
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, delay: 0.2 }}
+  viewport={{ once: true }}
+  className="text-center mt-12 sm:mt-16 px-4 sm:px-6"
+>
+  <div className="bg-gradient-to-r from-[#2E7D32] to-[#4DB6E2] rounded-xl sm:rounded-2xl p-6 sm:p-8 lg:p-10 text-white shadow-xl sm:shadow-2xl">
+    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-3 sm:mb-4 leading-tight">
+      Ready to Start Your Solar Project?
+    </h3>
+    <p className="text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
+      Get expert consultation and discover how our comprehensive solar services 
+      can transform your energy infrastructure and reduce costs.
+    </p>
+    <motion.button
+      onClick={() => navigate('/contact')}
+      whileHover={{ 
+        scale: 1.05, 
+        boxShadow: "0 10px 30px rgba(244, 196, 48, 0.4)" 
+      }}
+      whileTap={{ scale: 0.95 }}
+      className="bg-gradient-to-r from-[#F28B30] to-[#F4C430] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold hover:shadow-xl transition-all shadow-lg flex items-center justify-center gap-2 sm:gap-3 w-full sm:w-auto text-sm sm:text-base min-h-[50px] sm:min-h-0"
+    >
+      <Sun className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+      Get Free Consultation
+    </motion.button>
+  </div>
+</motion.div>
       </div>
     </section>
   );

@@ -113,7 +113,7 @@ const Services = () => {
   ];
 
   return (
-    <section className="py-24 bg-linear-to-br from-[#F6F7F4] to-white relative overflow-hidden">
+    <section className="py-24 bg-gradient-to-br from-[#F6F7F4] to-white relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
         <motion.div
@@ -153,12 +153,12 @@ const Services = () => {
 
           <h2 className="text-4xl md:text-5xl font-bold text-[#1E1E1E] mb-4">
             Solar Energy{" "}
-            <span className="bg-linear-to-r from-[#F4C430] to-[#F28B30] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#F4C430] to-[#F28B30] bg-clip-text text-transparent">
               Solutions
             </span>
           </h2>
           <motion.div
-            className="h-1 w-20 bg-linear-to-r from-[#F4C430] to-[#F28B30] mx-auto mb-6"
+            className="h-1 w-20 bg-gradient-to-r from-[#F4C430] to-[#F28B30] mx-auto mb-6"
             initial={{ width: 0 }}
             whileInView={{ width: "5rem" }}
             transition={{ delay: 0.3, duration: 0.5 }}
@@ -182,7 +182,7 @@ const Services = () => {
             >
               {/* Glow effect */}
               <div
-                className={`absolute inset-0 bg-linear-to-br ${service.gradient} opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500 rounded-2xl`}
+                className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500 rounded-2xl`}
               />
 
               <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-[#D9DDDC] h-full flex flex-col justify-between relative z-10">
@@ -240,7 +240,7 @@ const Services = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <div className="bg-linear-to-r from-[#2E7D32] to-[#4DB6E2] rounded-2xl p-10 text-white shadow-2xl">
+          <div className="bg-gradient-to-r from-[#2E7D32] to-[#4DB6E2] rounded-2xl p-10 text-white shadow-2xl">
             <h3 className="text-2xl md:text-3xl font-bold mb-4">
               Ready to Harness Solar Power?
             </h3>
@@ -255,7 +255,7 @@ const Services = () => {
                 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => navigate("/contact")}
-                className="bg-linear-to-r from-[#F28B30] to-[#F4C430] text-white px-8 py-4 rounded-xl font-bold hover:shadow-xl transition-all shadow-lg flex items-center gap-3"
+                className="bg-gradient-to-r from-[#F28B30] to-[#F4C430] text-white px-8 py-4 rounded-xl font-bold hover:shadow-xl transition-all shadow-lg flex items-center gap-3"
               >
                 <Phone className="h-5 w-5" />
                 Get Free Consultation

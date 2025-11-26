@@ -166,7 +166,7 @@ const ContactUs = () => {
   return (
     <section
       id="contact"
-      className="relative py-20 bg-linear-to-br from-[#F6F7F4] to-white overflow-hidden"
+      className="relative py-20 bg-gradient-to-br from-[#F6F7F4] to-white overflow-hidden"
     >
       {/* Background Elements */}
       <div className="absolute inset-0">
@@ -198,13 +198,13 @@ const ContactUs = () => {
 
           <h2 className="text-4xl md:text-5xl font-bold text-[#1E1E1E] mb-6">
             Start Your Solar{" "}
-            <span className="bg-linear-to-r from-[#F4C430] to-[#F28B30] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#F4C430] to-[#F28B30] bg-clip-text text-transparent">
               Journey
             </span>
           </h2>
           
           <motion.div
-            className="h-1 w-20 bg-linear-to-r from-[#F4C430] to-[#F28B30] mx-auto mb-6"
+            className="h-1 w-20 bg-gradient-to-r from-[#F4C430] to-[#F28B30] mx-auto mb-6"
             initial={{ width: 0 }}
             whileInView={{ width: "5rem" }}
             transition={{ delay: 0.3, duration: 0.5 }}
@@ -320,7 +320,7 @@ const ContactUs = () => {
             className="bg-white rounded-2xl p-8 md:mb-34 shadow-2xl border border-[#D9DDDC]"
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-linear-to-r from-[#F4C430] to-[#F28B30] flex items-center justify-center shadow-lg">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-[#F4C430] to-[#F28B30] flex items-center justify-center shadow-lg">
                 <Send className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -416,7 +416,7 @@ const ContactUs = () => {
                 disabled={isSubmitting}
                 whileHover={{ scale: isSubmitting ? 1 : 1.05, boxShadow: "0 10px 30px rgba(244, 196, 48, 0.4)" }}
                 whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
-                className="w-full bg-linear-to-r from-[#F28B30] to-[#F4C430] text-white py-4 px-6 rounded-xl font-bold hover:shadow-xl transition-all duration-300 flex items-center justify-center shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-gradient-to-r from-[#F28B30] to-[#F4C430] text-white py-4 px-6 rounded-xl font-bold hover:shadow-xl transition-all duration-300 flex items-center justify-center shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <>

@@ -129,7 +129,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-[#F6F7F4] to-white">
+    <div className="min-h-screen bg-gradient-to-b from-[#F6F7F4] to-white">
       <HeroSection />
 
       {/* Stats Section - Redesigned */}
@@ -167,7 +167,7 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ scale: 1.05, y: -5 }}
-                className="bg-linear-to-br from-white to-[#F6F7F4] rounded-2xl p-8 text-center shadow-lg border border-[#D9DDDC] hover:shadow-xl transition-all duration-300"
+                className="bg-gradient-to-br from-white to-[#F6F7F4] rounded-2xl p-8 text-center shadow-lg border border-[#D9DDDC] hover:shadow-xl transition-all duration-300"
               >
                 <div 
                   className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"

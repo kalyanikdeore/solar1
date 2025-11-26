@@ -70,6 +70,7 @@ const TestimonialSection = () => {
     },
   ];
 
+  
   // Client testimonials carousel scroll
   const scrollClients = (direction) => {
     if (clientsRef.current) {
@@ -141,7 +142,7 @@ const TestimonialSection = () => {
           </p>
         </motion.div>
 
-        {/* Testimonials Carousel */}
+        {/* Testimonials Carousel - FIXED CONTAINER */}
         <div className="relative">
           {/* Navigation Arrows */}
           <button
@@ -160,10 +161,10 @@ const TestimonialSection = () => {
             <ChevronRight className="w-6 h-6" />
           </button>
 
-          {/* Testimonials Container */}
+          {/* Testimonials Container - FIXED SCROLLING */}
           <div
             ref={clientsRef}
-            className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth py-4 px-2"
+            className="flex gap-6 overflow-x-auto overflow-y-hidden scrollbar-hide scroll-smooth py-4 px-2"
             style={{
               scrollbarWidth: "none",
               msOverflowStyle: "none",
@@ -172,7 +173,7 @@ const TestimonialSection = () => {
             {testimonials.map((client, index) => (
               <motion.div
                 key={client.id}
-                className="min-w-[350px] sm:min-w-[420px] bg-white rounded-2xl shadow-lg overflow-hidden border border-[#D9DDDC] hover:shadow-xl transition-all duration-500 group"
+                className="min-w-[350px] sm:min-w-[420px] bg-white rounded-2xl shadow-lg overflow-hidden border border-[#D9DDDC] hover:shadow-xl transition-all duration-500 group "
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
